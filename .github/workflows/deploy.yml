@@ -16,12 +16,12 @@ jobs:
       - name: 🚀 Subir archivos a Bluehost vía FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ftp.cvj.hbq.mybluehost.me  # 🔁 TU SERVIDOR ORIGINAL
+          server: ftp.habitareinmobiliaria.com.py  # ✅ HOST FUNCIONAL (usa el de tu dominio)
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           port: 21
-          server-dir: /home1/cvjhbqmy/public_html/ventas/  # ✅ RUTA ABSOLUTA PARA EVITAR QUE CREE CARPETAS FUERA DE LUGAR
+          server-dir: public_html/ventas/  # ✅ ruta relativa a la raíz de tu usuario FTP
           local-dir: ./
           dangerous-clean-slate: true
           exclude: |
@@ -32,4 +32,5 @@ jobs:
             **/.vscode/**
             **/node_modules/**
             **/*.log
+
 
