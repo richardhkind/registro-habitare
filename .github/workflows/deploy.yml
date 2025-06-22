@@ -3,7 +3,7 @@ name: 🚀 Deploy automático a Bluehost (FTP)
 on:
   push:
     branches:
-      - main  # Cambia si tu rama principal es "master"
+      - main  # Cambia a "master" si es tu rama principal
 
 jobs:
   ftp-deploy:
@@ -21,14 +21,14 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           port: 21
-          server-dir: public_html/ventas
+          server-dir: /public_html/ventas
           local-dir: ./
-          dangerous-clean-slate: true  # Limpia la carpeta antes de subir
+          dangerous-clean-slate: true
           exclude: |
             **/.git*
             **/.github/**
             **/README.md
-            **/deploy.yml
             **/.vscode/**
             **/node_modules/**
             **/*.log
+            **/deploy.yml
