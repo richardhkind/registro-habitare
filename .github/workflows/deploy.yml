@@ -1,4 +1,4 @@
-name: 🚀 Deploy via SFTP
+name: 🚀 Deploy to Bluehost
 
 on:
   push:
@@ -7,20 +7,18 @@ on:
 
 jobs:
   deploy:
-    name: Upload via SSH
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: Deploy to Bluehost
+      - name: Upload to Bluehost via SSH
         uses: easingthemes/ssh-deploy@v2.1.5
         with:
-          ssh-private-key: ${{ secrets.SFTP_PRIVATE_KEY }}
-          remote-user: richard@habitareinmobiliaria.com.py
-          server-ip: ftp.cvj.hbq.mybluehost.me
-          remote-path: /public_html/ventas
-          local-path: ./registro-habitare
-
-
+          SSH_PRIVATE_KEY: ${{ secrets.SFTP_PRIVATE_KEY }}
+          REMOTE_HOST: ftp.cvj.hbq.mybluehost.me
+          REMOTE_USER: richard
+          TARGET: /home1/cvjhbqmy/habitareinmobiliaria.com.py/richard
+          SOURCE: ./registro-habitare
 
