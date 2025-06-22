@@ -1,26 +1,34 @@
-name: 🚀 Deploy to Bluehost via FTP
+name: 🚀 Deploy automático a Bluehost (FTP)
 
 on:
   push:
     branches:
-      - main  # o 'master', si esa es tu rama principal
+      - main  # Cambia si tu rama principal es "master"
 
 jobs:
   ftp-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: 📥 Descargar código desde GitHub
         uses: actions/checkout@v3
 
-      - name: Upload via FTP
+      - name: 🚀 Subir archivos a Bluehost vía FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ftp.cvj.hbq.mybluehost.me
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          port: 21
           protocol: ftp
-          server-dir: /home1/cvjhbqmy/public_html/ventas/
+          port: 21
+          server-dir: /public_html/ventas/
           local-dir: ./
-          dangerous-clean-slate: false
+          dangerous-clean-slate: true  # Limpia la carpeta antes de subir
+          exclude: |
+            **/.git*
+            **/.github/**
+            **/README.md
+            **/deploy.yml
+            **/.vscode/**
+            **/node_modules/**
+            **/*.log
