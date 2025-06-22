@@ -21,7 +21,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           port: 21
-          server-dir: public_html/ventas/  # ✅ ruta relativa a la raíz de tu usuario FTP
+          server-dir: /public_html/ventas/  # ✅ ruta relativa a la raíz de tu usuario FTP
           local-dir: ./
           dangerous-clean-slate: true
           exclude: |
