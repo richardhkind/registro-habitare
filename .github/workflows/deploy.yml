@@ -1,25 +1,26 @@
-name: SFTP Deploy
+name: 🚀 Deploy via SFTP
 
 on:
   push:
     branches:
-      - main  # Cambiá si tu rama principal tiene otro nombre
+      - main
 
 jobs:
   deploy:
+    name: Upload via SSH
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Deploy to Bluehost via SFTP
-        uses: AEnterprise/sftp-deploy@v1.0.0
+      - name: Deploy to Bluehost
+        uses: easingthemes/ssh-deploy@v2.1.5
         with:
-          server: ftp.cvj.hbq.mybluehost.me
-          username: richard@habitareinmobiliaria.com.py
-          port: 22
-          ssh_private_key: ${{ secrets.SFTP_PRIVATE_KEY }}
-          local_path: ./registro-habitare   # ajustá si tu carpeta se llama diferente
-          remote_path: public_html/ventas
+          ssh-private-key: ${{ secrets.SFTP_PRIVATE_KEY }}
+          remote-user: richard@habitareinmobiliaria.com.py
+          server-ip: ftp.cvj.hbq.mybluehost.me
+          remote-path: /public_html/ventas
+          local-path: ./registro-habitare
+
 
 
