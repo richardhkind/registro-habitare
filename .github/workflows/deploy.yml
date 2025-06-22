@@ -1,4 +1,4 @@
-name: Deploy to Bluehost
+name: Deploy to Bluehost via SFTP
 
 on:
   push:
@@ -7,18 +7,20 @@ on:
 
 jobs:
   deploy:
-    name: Deploy via FTP to Bluehost
+    name: Deploy via SFTP to Bluehost
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Deploy via FTP to Bluehost
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      - name: Deploy to Bluehost via SFTP
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
+          username: ${{ secrets.SFTP_USERNAME }}
           server: ftp.cvj.hbq.mybluehost.me
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./
-          server-dir: public_html/ventas/
+          port: 22
+          privateKey: ${{ secrets.SFTP_PRIVATE_KEY }}
+          local_path: ./
+          remote_path: public_html/ventas/
+          sftp_only: true
