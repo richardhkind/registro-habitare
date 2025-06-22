@@ -16,7 +16,7 @@ jobs:
       - name: 🚀 Subir archivos a Bluehost vía FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ftp.cvj.hbq.mybluehost.me
+          server: ftp.bluehost.com
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
