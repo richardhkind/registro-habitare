@@ -22,5 +22,6 @@ jobs:
           protocol: ftp
           port: 21
           local-dir: ./
-          server-dir: /public_html/ventas/
+          server-dir: /home1/cvjhbqmy/public_html/ventas/
+
 
