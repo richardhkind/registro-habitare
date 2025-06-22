@@ -21,6 +21,6 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           port: 21
           protocol: ftp
-          server-dir: /public_html/ventas/
+          server-dir: /home1/cvjhbqmy/public_html/ventas/
           local-dir: ./
           dangerous-clean-slate: false
