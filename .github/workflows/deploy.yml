@@ -3,26 +3,27 @@ name: Deploy to Bluehost
 on:
   push:
     branches:
-      - main  # o la rama que estés usando
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repositorio
+      - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Instalar SSH client
-        run: sudo apt-get install -y openssh-client
-
-      - name: Configurar clave SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SFTP_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan ftp.cvj.hbq.mybluehost.me >> ~/.ssh/known_hosts
-
-      - name: Hacer deploy a Bluehost
-        run: |
-          rsync -avz --delete ./ public_html/ -e "ssh -o StrictHostKeyChecking=no richard@ftp.cvj.hbq.mybluehost.me"
+      - name: Deploy via SFTP to Bluehost
+        uses: wangyucode/sftp-upload-action@v1
+        with:
+          host: ftp.cvj.hbq.mybluehost.me
+          port: 21
+          username: richard@habitareinmobiliaria.com.py
+          privateKey: ${{ secrets.SFTP_PRIVATE_KEY }}
+          localDir: .
+          remoteDir: public_html/ventas
+          deleteRemoteFiles: false
+          exclude: |
+            .git/
+            .github/
+            README.md
