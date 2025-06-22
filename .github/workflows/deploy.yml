@@ -1,9 +1,9 @@
-name: Deploy via SFTP to Bluehost
+name: Deploy to Bluehost via SFTP
 
 on:
   push:
     branches:
-      - main
+      - main  # O 'master' si es tu rama principal
 
 jobs:
   deploy:
@@ -16,10 +16,10 @@ jobs:
       - name: Deploy to Bluehost via SFTP
         uses: pressidium/lftp-mirror-action@v1
         with:
-          host: ftp.cvj.hbq.mybluehost.me
+          host: ${{ secrets.SFTP_HOST }}
+          user: ${{ secrets.SFTP_USER }}
+          pass: ${{ secrets.SFTP_PASS }}
           port: 22
-          user: richard@habitareinmobiliaria.com.py
-          password: ${{ secrets.SFTP_PASSWORD }}
-          remoteDir: public_html/ventas/
           localDir: ./
-          options: --reverse --delete --verbose
+          remoteDir: /public_html/ventas/  # Ajustá según tu carpeta en Bluehost
+          args: --delete --verbose
