@@ -3,7 +3,7 @@ name: 🚀 Deploy automático a Bluehost (FTP)
 on:
   push:
     branches:
-      - main
+      - main  # Cambia si tu rama principal es otra (ej: master)
 
 jobs:
   ftp-deploy:
@@ -16,12 +16,12 @@ jobs:
       - name: 🚀 Subir archivos a Bluehost vía FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ftp.cvj.hbq.mybluehost.me
-          username: ${{ secrets.FTP_USERNAME }}
+          server: ftp.bluehost.com  # ✅ Usar el host FTP público y confiable
+          username: ${{ secrets.FTP_USERNAME }}  # debe ser como richard@habitare...
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           port: 21
-          server-dir: /public_html/ventas/
+          server-dir: public_html/ventas/  # ✅ RUTA RELATIVA A LA RAÍZ DEL USUARIO FTP
           local-dir: ./
           dangerous-clean-slate: true
           exclude: |
