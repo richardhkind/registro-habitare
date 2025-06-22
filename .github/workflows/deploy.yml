@@ -1,26 +1,25 @@
-name: Deploy via SFTP
+name: SFTP Deploy
 
 on:
   push:
     branches:
-      - main
+      - main  # o la rama que uses
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: SFTP Deploy
-        uses: pressidium/lftp-mirror-action@v1.0.0
+      - name: SFTP Deploy with SSH Key
+        uses: AEnterprise/sftp-deploy@v2.0.0
         with:
-          host: ftp.habitareinmobiliaria.com.py
-          user: "richard"  # <- este es el INPUT_USER que falta
+          server: ftp.cvj.hbq.mybluehost.me
+          username: richard@habitareinmobiliaria.com.py
           port: 22
-          privateKey: ${{ secrets.SFTP_PRIVATE_KEY }}
-          remoteDir: /public_html/ventas/
-          localDir: ./
-          verifyCertificate: false
-          forceSSL: false
+          ssh_private_key: ${{ secrets.SFTP_PRIVATE_KEY }}
+          local_path: ./registro-habitare  # carpeta con tu web
+          remote_path: public_html/ventas
+
 
