@@ -1,25 +1,26 @@
-name: Deploy to Bluehost via SFTP
+name: 🚀 Deploy to Bluehost via FTP
 
 on:
   push:
     branches:
-      - main  # O 'master' si es tu rama principal
+      - main  # o 'master', si esa es tu rama principal
 
 jobs:
-  deploy:
+  ftp-deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Deploy to Bluehost via SFTP
-        uses: pressidium/lftp-mirror-action@v1
+      - name: Upload via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          host: ${{ secrets.SFTP_HOST }}
-          user: ${{ secrets.SFTP_USER }}
-          pass: ${{ secrets.SFTP_PASS }}
-          port: 22
-          localDir: ./
-          remoteDir: /public_html/ventas/  # Ajustá según tu carpeta en Bluehost
-          args: --delete --verbose
+          server: ftp.cvj.hbq.mybluehost.me
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 21
+          protocol: ftp
+          server-dir: /public_html/ventas/
+          local-dir: ./
+          dangerous-clean-slate: false
