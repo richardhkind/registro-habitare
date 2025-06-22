@@ -1,24 +1,28 @@
-name: 🚀 Deploy to Bluehost
+name: Deploy to Bluehost
 
 on:
   push:
     branches:
-      - main
+      - main  # o la rama que estés usando
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repo
+      - name: Checkout repositorio
         uses: actions/checkout@v3
 
-      - name: Upload to Bluehost via SSH
-        uses: easingthemes/ssh-deploy@v2.1.5
-        with:
-          SSH_PRIVATE_KEY: ${{ secrets.SFTP_PRIVATE_KEY }}
-          REMOTE_HOST: ftp.cvj.hbq.mybluehost.me
-          REMOTE_USER: richard
-          TARGET: /home1/cvjhbqmy/habitareinmobiliaria.com.py/richard
-          SOURCE: ./registro-habitare
+      - name: Instalar SSH client
+        run: sudo apt-get install -y openssh-client
 
+      - name: Configurar clave SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SFTP_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan ftp.cvj.hbq.mybluehost.me >> ~/.ssh/known_hosts
+
+      - name: Hacer deploy a Bluehost
+        run: |
+          rsync -avz --delete ./ public_html/ -e "ssh -o StrictHostKeyChecking=no richard@ftp.cvj.hbq.mybluehost.me"
