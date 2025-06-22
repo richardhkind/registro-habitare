@@ -19,4 +19,4 @@ jobs:
           server: ftp.cvj.hbq.mybluehost.me
           username: richard@habitareinmobiliaria.com.py
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: public_html/ventas/
+          server-dir: /home1/cvjhbqmy/public_html/ventas/
