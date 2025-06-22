@@ -1,4 +1,4 @@
-name: Deploy to Bluehost via FTP
+name: SFTP Deploy to Bluehost
 
 on:
   push:
@@ -6,21 +6,19 @@ on:
       - main
 
 jobs:
-  ftp-deploy:
-    name: FTP Deploy
+  sftp-deploy:
+    name: Deploy via SFTP
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: FTP Deploy
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      - name: SFTP Deploy
+        uses: pressidium/lftp-mirror-action@v1.0.3
         with:
-          server: ftp.cvj.hbq.mybluehost.me
+          host: box5539.bluehost.com
+          port: 22
           username: richard@habitareinmobiliaria.com.py
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftp
-          port: 21
-          local-dir: ./
-          server-dir: /home1/cvjhbqmy/public_html/ventas/
-
+          privateKey: ${{ secrets.SFTP_PRIVATE_KEY }}
+          localDir: ./
+          remoteDir: /public_html/ventas
