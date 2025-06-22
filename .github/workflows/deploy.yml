@@ -13,17 +13,11 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Deploy via SFTP to Bluehost
-        uses: wangyucode/sftp-upload-action@v1
+      - name: Deploy via FTP to Bluehost
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          host: ftp.cvj.hbq.mybluehost.me
-          port: 21
-          username: richard@habitareinmobiliaria.com.py
-          privateKey: ${{ secrets.SFTP_PRIVATE_KEY }}
-          localDir: .
-          remoteDir: public_html/ventas
-          deleteRemoteFiles: false
-          exclude: |
-            .git/
-            .github/
-            README.md
+          server: ftp.cvj.hbq.mybluehost.me
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: .
+          server-dir: public_html/ventas
