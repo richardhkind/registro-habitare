@@ -3,7 +3,7 @@ name: SFTP Deploy
 on:
   push:
     branches:
-      - main  # o la rama que uses
+      - main  # Cambiá si tu rama principal tiene otro nombre
 
 jobs:
   deploy:
@@ -12,14 +12,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: SFTP Deploy with SSH Key
-        uses: AEnterprise/sftp-deploy@v2.0.0
+      - name: Deploy to Bluehost via SFTP
+        uses: AEnterprise/sftp-deploy@v1.0.0
         with:
           server: ftp.cvj.hbq.mybluehost.me
           username: richard@habitareinmobiliaria.com.py
           port: 22
           ssh_private_key: ${{ secrets.SFTP_PRIVATE_KEY }}
-          local_path: ./registro-habitare  # carpeta con tu web
+          local_path: ./registro-habitare   # ajustá si tu carpeta se llama diferente
           remote_path: public_html/ventas
 
 
