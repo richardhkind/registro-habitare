@@ -3,7 +3,7 @@ name: 🚀 Deploy automático a Bluehost (FTP)
 on:
   push:
     branches:
-      - main  # Cambiá si tu rama principal es otra (ej: master)
+      - main  # Cambia esto si tu rama principal es otra (ej: master)
 
 jobs:
   ftp-deploy:
@@ -13,15 +13,15 @@ jobs:
       - name: 📥 Descargar código desde GitHub
         uses: actions/checkout@v3
 
-      - name: 🚀 Subir archivos a Bluehost fuera de la raíz
+      - name: 🚀 Subir archivos a Bluehost vía FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ftp.cvj.hbq.mybluehost.me
-          username: ${{ secrets.FTP_USERNAME }}         # = richard@habitareinmobiliaria.com.py
-          password: ${{ secrets.FTP_PASSWORD }}
+          username: ${{ secrets.FTP_USERNAME }}         # = cvjhbqmy
+          password: ${{ secrets.FTP_PASSWORD }}         # = tu contraseña de cPanel
           protocol: ftp
           port: 21
-          server-dir: ../../../../../public_html/ventas/
+          server-dir: public_html/ventas/               # ✅ sin duplicar ruta
           local-dir: ./
           dangerous-clean-slate: true
           exclude: |
