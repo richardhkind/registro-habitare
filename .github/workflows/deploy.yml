@@ -3,7 +3,7 @@ name: 🚀 Deploy automático a Bluehost (FTP)
 on:
   push:
     branches:
-      - main
+      - main  # Cambiá si tu rama principal es otra (ej: master)
 
 jobs:
   ftp-deploy:
@@ -13,24 +13,22 @@ jobs:
       - name: 📥 Descargar código desde GitHub
         uses: actions/checkout@v3
 
-      - name: 🚀 Subir archivos a Bluehost vía FTP
+      - name: 🚀 Subir archivos a Bluehost fuera de la raíz
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ftp.habitareinmobiliaria.com.py  # ✅ HOST FUNCIONAL (usa el de tu dominio)
-          username: ${{ secrets.FTP_USERNAME }}
+          server: ftp.cvj.hbq.mybluehost.me
+          username: ${{ secrets.FTP_USERNAME }}         # = richard@habitareinmobiliaria.com.py
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftp
           port: 21
-          server-dir: /public_html/ventas/  # ✅ ruta relativa a la raíz de tu usuario FTP
+          server-dir: ../../../../../public_html/ventas/
           local-dir: ./
           dangerous-clean-slate: true
           exclude: |
             **/.git*
             **/.github/**
-            **/README.md
-            **/deploy.yml
             **/.vscode/**
             **/node_modules/**
             **/*.log
-
-
+            README.md
+            deploy.yml
