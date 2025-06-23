@@ -1,3 +1,0 @@
-# Proyecto de Registro Habitare
-
-Formulario básico en PHP que guarda nombre, email y contraseña (encriptada) en MySQL. Desplegado automáticamente a Bluehost con GitHub Actions.
