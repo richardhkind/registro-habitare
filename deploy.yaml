@@ -21,7 +21,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}         # = tu contraseña de cPanel
           protocol: ftp
           port: 21
-          server-dir: public_html/ventas/               # ✅ sin duplicar ruta
+          server-dir: public_html/ventas/             # ✅ sin duplicar ruta
           local-dir: ./
           dangerous-clean-slate: true
           exclude: |
